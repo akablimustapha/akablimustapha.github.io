@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mustapha Akabli – Ingénieur Full Stack Java / Angular</title>
+  <meta name="description" content="Portfolio de Mustapha Akabli, ingénieur d'État en informatique (EMSI) et développeur Full Stack Java / Spring Boot / Angular basé à Rabat. Disponible en CDI ou freelance." />
+  <meta property="og:title" content="Mustapha Akabli – Ingénieur Full Stack Java / Angular" />
+  <meta property="og:description" content="Java · Spring Boot · Angular · Microservices. Disponible en CDI ou freelance." />
+  <meta property="og:image" content="https://akablimustapha.github.io/assets/travel-booking.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f5e57'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='700' font-size='30' fill='white'>MA</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal-900: #0b4a44;
+      --teal-800: #0f5e57;
+      --teal-400: #3fb8a9;
+      --teal-100: #dcefeb;
+      --gold: #c8963e;
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --surface-2: #f0ede6;
+      --text: #172226;
+      --muted: #5d6b71;
+      --border: #e3ded3;
+      --code-bg: #0f1b1e;
+      --shadow: 0 14px 40px rgba(15, 94, 87, 0.10);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0c1315; --surface: #131d20; --surface-2: #1a272a; --text: #e8eeee;
+        --muted: #9aa9ad; --border: #23343a; --teal-100: #15312d; --shadow: 0 14px 40px rgba(0,0,0,.35);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0c1315; --surface: #131d20; --surface-2: #1a272a; --text: #e8eeee;
+      --muted: #9aa9ad; --border: #23343a; --teal-100: #15312d; --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Ubuntu', 'Inter', sans-serif; line-height: 1.15; margin: 0; }
+    a { color: var(--teal-800); }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- Barre de navigation ---------- */
+    .nav { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .25s, box-shadow .25s; }
+    .nav.scrolled { background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--border); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { font-family: 'Ubuntu', sans-serif; font-weight: 700; font-size: 1.2rem; text-decoration: none; color: #fff; }
+    .nav.scrolled .logo { color: var(--text); }
+    .logo span { color: var(--teal-400); }
+    .menu { display: flex; align-items: center; gap: 22px; }
+    .menu a { color: rgba(255,255,255,.88); text-decoration: none; font-weight: 500; font-size: .95rem; }
+    .nav.scrolled .menu a { color: var(--muted); }
+    .menu a:hover { color: var(--teal-400) !important; }
+    .theme-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); color: #fff; cursor: pointer; }
+    .nav.scrolled .theme-btn { border-color: var(--border); background: var(--surface); color: var(--text); }
+
+    /* ---------- Bannière (hero) ---------- */
+    .hero {
+      position: relative; color: #fff; overflow: hidden;
+      background: linear-gradient(120deg, var(--teal-900) 0%, var(--teal-800) 45%, var(--teal-400) 100%);
+      padding: 130px 0 170px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; opacity: .14;
+      background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 26px 26px;
+    }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; }
+    .hello { font-size: 1.05rem; opacity: .9; margin-bottom: 8px; }
+    .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); letter-spacing: -.01em; }
+    .hero .subtitle { font-family: 'Ubuntu', sans-serif; font-size: clamp(1.15rem, 2.4vw, 1.5rem); margin-top: 8px; opacity: .95; }
+    .typing {
+      margin-top: 22px; font-family: 'Fira Code', monospace; font-weight: 600; font-size: clamp(1rem, 2.2vw, 1.3rem);
+      min-height: 1.8em; color: #eafff9;
+    }
+    .typing .cursor { display: inline-block; width: 3px; height: 1.15em; background: #fff; margin-left: 4px; vertical-align: -3px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 8px;
+      font-weight: 700; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: #fff;
+      box-shadow: 0 6px 16px rgba(0,0,0,.18); transition: transform .15s;
+    }
+    .pill:hover { transform: translateY(-3px); }
+    .pill svg { width: 16px; height: 16px; }
+    .pill-portfolio { background: #0b3f3a; }
+    .pill-linkedin { background: #0a66c2; }
+    .pill-malt { background: #fc5757; }
+    .pill-email { background: var(--gold); }
+
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .badge { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); border-radius: 6px; padding: 4px 10px; font-size: .85rem; }
+    .badge.ok { background: var(--teal-400); border-color: var(--teal-400); color: #06302b; font-weight: 600; }
+
+    .avatar { justify-self: center; position: relative; }
+    .avatar img {
+      width: min(330px, 72vw); aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+      border: 8px solid rgba(255,255,255,.9); box-shadow: 0 25px 60px rgba(0,0,0,.28);
+    }
+    .avatar .ring { position: absolute; inset: -18px; border: 2px dashed rgba(255,255,255,.45); border-radius: 50%; animation: spin 40s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar .float {
+      position: absolute; background: var(--surface); color: var(--text); border-radius: 12px; padding: 8px 12px;
+      font-weight: 600; font-size: .85rem; box-shadow: 0 10px 25px rgba(0,0,0,.2); display: flex; align-items: center; gap: 8px; white-space: nowrap;
+    }
+    .avatar .f1 { top: 12%; left: -14%; }
+    .avatar .f2 { bottom: 10%; right: -10%; }
+    .avatar .float img { width: 22px; height: 22px; border: 0; border-radius: 0; box-shadow: none; }
+
+    .wave { position: absolute; left: 0; right: 0; bottom: -1px; line-height: 0; }
+    .wave svg { width: 100%; height: 120px; display: block; }
+    .wave path { fill: var(--bg); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 72px 0; }
+    .title { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .title .emoji { font-size: 1.7rem; }
+    .title h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+
+    /* Qui suis-je : la classe Java */
+    .about { display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; align-items: start; }
+    .code-window { background: var(--code-bg); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .code-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #0a1416; border-bottom: 1px solid #1e2e32; }
+    .code-bar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .code-bar i:nth-child(1) { background: #ff5f57; } .code-bar i:nth-child(2) { background: #febc2e; } .code-bar i:nth-child(3) { background: #28c840; }
+    .code-bar span { margin-left: 10px; color: #8aa3a8; font-family: 'Fira Code', monospace; font-size: .8rem; }
+    pre { margin: 0; padding: 20px 22px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: .86rem; line-height: 1.75; color: #d6e4e6; }
+    .k { color: #ff7b72; } .t { color: #79c0ff; } .s { color: #a5d6a7; } .c { color: #ffd580; } .m { color: #d2a8ff; }
+    .about-text p { color: var(--muted); font-size: 1.05rem; margin: 0 0 14px; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .fact { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .fact strong { display: block; font-family: 'Ubuntu', sans-serif; font-size: 1.5rem; color: var(--teal-800); }
+    :root[data-theme="dark"] .fact strong { color: var(--teal-400); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fact strong { color: var(--teal-400); } }
+    .fact span { color: var(--muted); font-size: .88rem; }
+
+    /* Réalisations */
+    .achievements { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .achievement { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; gap: 16px; transition: transform .2s, box-shadow .2s; }
+    .achievement:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .achievement .icon { flex: 0 0 52px; height: 52px; border-radius: 14px; background: var(--teal-100); display: grid; place-items: center; font-size: 1.6rem; }
+    .achievement h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .achievement p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    /* Stack */
+    .stack { display: grid; gap: 18px; justify-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 34px 20px; }
+    .stack-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .tech { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 76px; font-size: .78rem; color: var(--muted); font-weight: 500; text-align: center; }
+    .tech img { width: 52px; height: 52px; transition: transform .2s; }
+    .tech:hover img { transform: translateY(-4px) scale(1.06); }
+    .also { margin-top: 18px; text-align: center; color: var(--muted); }
+    .also strong { color: var(--text); }
+
+    /* Expériences */
+    .timeline { position: relative; margin-left: 10px; border-left: 3px solid var(--teal-100); }
+    .job { position: relative; padding: 0 0 34px 34px; }
+    .job::before { content: ''; position: absolute; left: -11px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--teal-800); border: 4px solid var(--bg); box-shadow: 0 0 0 2px var(--teal-400); }
+    .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+    .job h3 { font-size: 1.15rem; }
+    .job .company { color: var(--teal-800); }
+    :root[data-theme="dark"] .job .company { color: var(--teal-400); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .job .company { color: var(--teal-400); } }
+    .job .date { font-size: .85rem; font-weight: 600; color: var(--gold); }
+    .job ul { margin: 8px 0 10px; padding-left: 18px; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { background: var(--surface-2); border-radius: 6px; padding: 3px 9px; font-size: .8rem; font-weight: 600; }
+
+    /* Projet à la une */
+    .featured { display: grid; grid-template-columns: 1.2fr 1fr; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .featured img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+    .featured-body { padding: 30px; display: flex; flex-direction: column; gap: 12px; }
+    .featured-body h3 { font-size: 1.5rem; }
+    .featured-body p { margin: 0; color: var(--muted); }
+    .featured-body ul { list-style: none; padding: 0; margin: 4px 0; display: grid; gap: 8px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; letter-spacing: .04em; font-size: .85rem; text-transform: uppercase; align-self: flex-start; }
+    .btn-teal { background: var(--teal-800); color: #fff; }
+    .btn-teal:hover { background: var(--teal-900); }
+    .others { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+    .mini { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .mini .emoji { font-size: 1.8rem; }
+    .mini .label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+    .mini h3 { font-size: 1.1rem; }
+    .mini p { margin: 0; color: var(--muted); font-size: .93rem; }
+    .mini a { margin-top: auto; font-weight: 600; text-decoration: none; padding-top: 6px; }
+
+    /* Statistiques GitHub */
+    .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .stats img { height: 170px; width: auto; border-radius: 12px; background: #fff; }
+
+    /* Contact + vague finale */
+    .contact { position: relative; color: #fff; text-align: center; background: linear-gradient(120deg, var(--teal-400), var(--teal-800) 60%, var(--teal-900)); padding: 150px 0 70px; margin-top: 40px; }
+    .contact .wave { top: -1px; bottom: auto; transform: rotate(180deg); }
+    .contact h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); margin-bottom: 12px; }
+    .contact p { opacity: .92; max-width: 580px; margin: 0 auto 26px; font-size: 1.05rem; }
+    .contact .pills { justify-content: center; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 50;
+      background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 14px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.25); padding: 16px 18px; width: min(420px, calc(100% - 32px));
+      transition: transform .3s ease; font-size: .95rem;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .toast strong { display: block; margin-bottom: 4px; }
+    .toast .addr { font-family: 'Fira Code', monospace; font-size: .9rem; color: var(--teal-800); word-break: break-all; }
+    .toast .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .toast a, .toast button { font: inherit; font-size: .85rem; font-weight: 600; padding: 8px 12px; border-radius: 8px; cursor: pointer; text-decoration: none; }
+    .toast .gmail { background: var(--teal-800); color: #fff; border: 0; }
+    .toast .close { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    footer { background: var(--teal-900); color: rgba(255,255,255,.7); text-align: center; padding: 18px; font-size: .88rem; }
+
+    /* Apparition au défilement */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .avatar .ring, .typing .cursor { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { padding: 110px 0 140px; }
+      .hero .wrap, .about, .featured { grid-template-columns: 1fr; }
+      .avatar { order: -1; }
+      .avatar .f1 { left: -4%; } .avatar .f2 { right: -4%; }
+      .achievements, .others { grid-template-columns: 1fr; }
+      .menu a.hide-sm { display: none; }
+    }
+    @media (max-width: 480px) {
+      .menu { gap: 14px; }
+      .pill { padding: 10px 14px; font-size: .75rem; }
+      pre { font-size: .76rem; padding: 16px; }
+      .stats img { height: auto; width: 100%; }
+      .featured-body { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a href="#" class="logo">Mustapha<span>.</span>Akabli</a>
+      <div class="menu">
+        <a href="#qui-suis-je" class="hide-sm">Profil</a>
+        <a href="#stack" class="hide-sm">Stack</a>
+        <a href="#experiences" class="hide-sm">Expériences</a>
+        <a href="#projets">Projets</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-btn" id="themeBtn" aria-label="Changer de thème">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Bannière -->
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hello">👋 Bonjour, je suis</div>
+        <h1>Mustapha Akabli</h1>
+        <div class="subtitle">Ingénieur Full Stack Java / Angular</div>
+        <div class="typing" aria-live="polite"><span id="typed"></span><span class="cursor"></span></div>
+
+        <div class="pills">
+          <a class="pill pill-portfolio" href="#projets">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 7h18v13H3z"/><path d="M8 7V4h8v3"/></svg>Mes projets
+          </a>
+          <a class="pill pill-linkedin" href="https://www.linkedin.com/in/mustapha-akabli-a2042422a/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn
+          </a>
+          <a class="pill pill-malt" href="https://www.malt.fr/profile/mustaphaakabli" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 2 12l10 10 10-10L12 2zm0 4.2L17.8 12 12 17.8 6.2 12 12 6.2z"/></svg>Malt freelance
+          </a>
+          <a class="pill pill-email js-email" href="mailto:mustapha.akabli.2018@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email
+          </a>
+        </div>
+
+        <div class="badges">
+          <span class="badge">📍 Rabat, Maroc</span>
+          <span class="badge">🎓 Ingénieur d'État EMSI 2024</span>
+          <span class="badge ok">✅ Disponible immédiatement</span>
+        </div>
+      </div>
+
+      <div class="avatar">
+        <div class="ring" aria-hidden="true"></div>
+        <!-- Pour changer la photo : ajoute "photo.jpg" dans le dépôt et remplace le lien ci-dessous par "photo.jpg" -->
+        <img src="https://avatars.githubusercontent.com/u/110411170?v=4" alt="Photo de Mustapha Akabli" />
+        <div class="float f1"><img src="https://skillicons.dev/icons?i=java" alt="" />Java 17</div>
+        <div class="float f2"><img src="https://skillicons.dev/icons?i=angular" alt="" />Angular</div>
+      </div>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,120 480,0 720,40 C960,80 1200,110 1440,50 L1440,120 L0,120 Z"/></svg>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Qui suis-je -->
+    <section id="qui-suis-je" class="reveal">
+      <div class="title"><span class="emoji">👨‍💻</span><h2>Qui suis-je ?</h2></div>
+      <div class="about">
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>MustaphaAkabli.java</span></div>
+<pre><span class="k">public class</span> <span class="t">MustaphaAkabli</span> {
+
+    <span class="t">String</span> role       = <span class="s">"Ingénieur Full Stack Java / Angular"</span>;
+    <span class="t">String</span> diplome    = <span class="s">"Ingénieur d'État – EMSI Rabat (2024)"</span>;
+    <span class="t">String</span> ville      = <span class="s">"Rabat, Maroc 🇲🇦"</span>;
+    <span class="t">String</span>[] langues  = {<span class="s">"Arabe"</span>, <span class="s">"Français"</span>, <span class="s">"Anglais"</span>};
+
+    <span class="t">String</span>[] backend  = {<span class="s">"Spring Boot"</span>, <span class="s">"Kafka"</span>, <span class="s">"Keycloak"</span>};
+    <span class="t">String</span>[] frontend = {<span class="s">"Angular"</span>, <span class="s">"TypeScript"</span>, <span class="s">"RxJS"</span>};
+    <span class="t">String</span>[] devops   = {<span class="s">"Docker"</span>, <span class="s">"GitHub Actions"</span>, <span class="s">"JUnit"</span>};
+
+    <span class="t">String</span> recherche  = <span class="s">"CDI ou mission freelance 🚀"</span>;
+
+    <span class="t">String</span> <span class="m">motivation</span>() {
+        <span class="k">return</span> <span class="s">"Livrer des applications fiables et utiles."</span>;
+    }
+}</pre>
+        </div>
+        <div class="about-text">
+          <p>Ingénieur d'État en informatique et réseaux (option MIAGE), diplômé de l'<strong>EMSI Rabat en 2024</strong>, je développe des applications web complètes, de l'API <strong>Spring Boot</strong> jusqu'à l'interface <strong>Angular</strong>.</p>
+          <p>J'ai travaillé sur une plateforme de traçabilité en <strong>microservices</strong>, sur des traitements <strong>Spring Batch</strong> chez Sofrecom, et j'ai livré en freelance une application publiée sur l'<strong>App Store</strong> et le <strong>Play Store</strong>.</p>
+          <div class="facts">
+            <div class="fact"><strong>2024</strong><span>Ingénieur d'État EMSI</span></div>
+            <div class="fact"><strong>5</strong><span>expériences en entreprise</span></div>
+            <div class="fact"><strong>1</strong><span>app publiée sur les stores</span></div>
+            <div class="fact"><strong>FR · AR · EN</strong><span>langues de travail</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Réalisations -->
+    <section id="realisations" class="reveal">
+      <div class="title"><span class="emoji">💼</span><h2>Ce que j'ai réalisé</h2></div>
+      <div class="achievements">
+        <div class="achievement"><div class="icon">🏭</div><div><h3>Traçabilité industrielle</h3><p>Plateforme en microservices pour l'agroalimentaire et la pharmacie : Spring Cloud Gateway, Eureka, Kafka, Keycloak, WebSockets, monitoring Grafana / Prometheus.</p></div></div>
+        <div class="achievement"><div class="icon">🕋</div><div><h3>Omraty (freelance)</h3><p>Application de réservation Omra & Hajj, bilingue français / arabe, publiée sur l'App Store et le Play Store, avec un panel d'administration.</p></div></div>
+        <div class="achievement"><div class="icon">⚙️</div><div><h3>Sofrecom</h3><p>Administration et automatisation des Batch Jobs (Spring Batch, Angular, PrimeNG) pour la plateforme IaaS Cockpit.</p></div></div>
+        <div class="achievement"><div class="icon">✈️</div><div><h3>Travel Booking Platform</h3><p>Projet open source complet : sécurité JWT, verrou contre la double réservation, tests, Docker et CI.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack" class="reveal">
+      <div class="title"><span class="emoji">🛠️</span><h2>Ma stack</h2></div>
+      <div class="stack">
+        <div class="stack-row">
+          <div class="tech"><img src="https://skillicons.dev/icons?i=java" alt="" />Java</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=spring" alt="" />Spring Boot</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=angular" alt="" />Angular</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=ts" alt="" />TypeScript</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=html" alt="" />HTML</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=css" alt="" />CSS</div>
+        </div>
+        <div class="stack-row">
+          <div class="tech"><img src="https://skillicons.dev/icons?i=postgres" alt="" />PostgreSQL</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=mysql" alt="" />MySQL</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=docker" alt="" />Docker</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=kubernetes" alt="" />Kubernetes</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=githubactions" alt="" />GitHub Actions</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=maven" alt="" />Maven</div>
+        </div>
+        <div class="stack-row">
+          <div class="tech"><img src="https://skillicons.dev/icons?i=git" alt="" />Git</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=github" alt="" />GitHub</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=postman" alt="" />Postman</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=idea" alt="" />IntelliJ</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=vscode" alt="" />VS Code</div>
+          <div class="tech"><img src="https://skillicons.dev/icons?i=linux" alt="" />Linux</div>
+        </div>
+      </div>
+      <p class="also"><strong>Aussi :</strong> Spring Security (JWT, OAuth2) · Spring Cloud · Spring Batch · Kafka · Keycloak · RxJS · PrimeNG · JUnit · Mockito · Swagger · Agile Scrum</p>
+    </section>
+
+    <!-- Expériences -->
+    <section id="experiences" class="reveal">
+      <div class="title"><span class="emoji">🧭</span><h2>Expériences</h2></div>
+      <div class="timeline">
+        <div class="job">
+          <div class="job-head"><h3>Développeur Full Stack <span class="company">· Omraty (freelance)</span></h3><span class="date">Nov. 2025 – Août 2026</span></div>
+          <ul>
+            <li>Application de réservation Omra & Hajj bilingue, publiée sur l'App Store et le Play Store</li>
+            <li>Catalogue des forfaits, parcours de réservation, espace client, notifications et panel d'administration</li>
+          </ul>
+          <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span><span class="tag">Firebase</span></div>
+        </div>
+        <div class="job">
+          <div class="job-head"><h3>Ingénieur Web Full Stack <span class="company">· Xperlean, Mohammédia</span></h3><span class="date">Oct. 2024 – Oct. 2025</span></div>
+          <ul>
+            <li>Solutions de traçabilité (agroalimentaire, pharmaceutique, céramique) en architecture microservices</li>
+            <li>Spring Cloud Gateway, Config Server, Eureka, Feign ; communication asynchrone avec Kafka</li>
+            <li>Sécurité Keycloak (OIDC / OAuth2), notifications temps réel (WebSockets), monitoring Grafana / Prometheus, tests JUnit</li>
+          </ul>
+          <div class="tags"><span class="tag">Microservices</span><span class="tag">Kafka</span><span class="tag">Keycloak</span><span class="tag">PostgreSQL</span><span class="tag">Angular</span></div>
+        </div>
+        <div class="job">
+          <div class="job-head"><h3>Stage – Développeur Full Stack <span class="company">· Sofrecom Services Maroc</span></h3><span class="date">Mars – Sept. 2024</span></div>
+          <ul><li>Administration et automatisation des Batch Jobs du projet BRMC / IaaS Cockpit, en méthode Agile Scrum</li></ul>
+          <div class="tags"><span class="tag">Spring Batch</span><span class="tag">Angular</span><span class="tag">PrimeNG</span><span class="tag">MariaDB</span></div>
+        </div>
+        <div class="job">
+          <div class="job-head"><h3>Stage – Développeur Full Stack <span class="company">· Bayane Solution</span></h3><span class="date">Juin – Août 2023</span></div>
+          <ul><li>Application web pour automatiser le système de management de la qualité (ISO 9001)</li></ul>
+          <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span></div>
+        </div>
+        <div class="job">
+          <div class="job-head"><h3>Stage – Développeur Full Stack <span class="company">· First Informatique and Security</span></h3><span class="date">Juin – Août 2022</span></div>
+          <ul><li>Application de gestion de la sécurité et du gardiennage, conteneurisée avec Docker</li></ul>
+          <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">MySQL</span><span class="tag">Docker</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets" class="reveal">
+      <div class="title"><span class="emoji">🚀</span><h2>Projet à la une</h2></div>
+      <div class="featured">
+        <a href="https://github.com/akablimustapha/travel-booking-platform" target="_blank" rel="noopener"><img src="assets/travel-booking.jpg" alt="Capture de Travel Booking Platform" loading="lazy" /></a>
+        <div class="featured-body">
+          <h3>✈️ Travel Booking Platform</h3>
+          <p>Plateforme de réservation de voyages : places en temps réel, espace client et back-office admin.</p>
+          <ul>
+            <li>🔐 Spring Security + <b>JWT</b>, rôles client / admin</li>
+            <li>🔒 Verrou contre la double réservation</li>
+            <li>🧪 Tests <b>JUnit</b>, Mockito et MockMvc</li>
+            <li>🐳 <b>Docker Compose</b> + CI GitHub Actions</li>
+          </ul>
+          <div class="tags"><span class="tag">Spring Boot</span><span class="tag">PostgreSQL</span><span class="tag">Angular 18</span></div>
+          <a class="btn btn-teal" href="https://github.com/akablimustapha/travel-booking-platform" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3"/></svg>Voir le code
+          </a>
+        </div>
+      </div>
+      <div class="others">
+        <div class="mini"><span class="emoji">🕋</span><span class="label">Freelance · en production</span><h3>Omraty</h3><p>Réservation Omra & Hajj bilingue, publiée sur l'App Store et le Play Store.</p><a href="https://apps.apple.com/ph/app/omraty/id6815520297" target="_blank" rel="noopener">Voir sur l'App Store →</a></div>
+        <div class="mini"><span class="emoji">🏭</span><span class="label">Expérience pro</span><h3>Traçabilité industrielle</h3><p>Microservices Spring Cloud, Kafka et Keycloak. Code propriétaire, non public.</p></div>
+        <div class="mini"><span class="emoji">📍</span><span class="label">Test technique</span><h3>GPS Tracking</h3><p>Suivi de positions avec Spring Boot et une application Ionic / Angular.</p><a href="https://github.com/akablimustapha/gps-tracking-project" target="_blank" rel="noopener">Code source →</a></div>
+      </div>
+    </section>
+
+    <!-- Statistiques -->
+    <section id="activite" class="reveal">
+      <div class="title"><span class="emoji">📊</span><h2>Mon activité GitHub</h2></div>
+      <div class="stats">
+        <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=akablimustapha&theme=default" alt="Statistiques GitHub" loading="lazy" />
+        <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=akablimustapha&theme=default" alt="Langages les plus utilisés" loading="lazy" />
+        <img src="https://streak-stats.demolab.com?user=akablimustapha&hide_border=true&ring=0F5E57&fire=C8963E&currStreakLabel=0F5E57&locale=fr" alt="Série de contributions" loading="lazy" />
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,120 480,0 720,40 C960,80 1200,110 1440,50 L1440,120 L0,120 Z"/></svg>
+    </div>
+    <div class="wrap">
+      <h2>🤝 Travaillons ensemble</h2>
+      <p>Vous cherchez un <strong>développeur Java / Angular</strong> motivé et rigoureux, pour un poste en CDI ou une mission freelance ? Écrivez-moi, je réponds rapidement.</p>
+      <div class="pills">
+        <a class="pill pill-email js-email" href="mailto:mustapha.akabli.2018@gmail.com">✉ M'écrire</a>
+        <a class="pill pill-linkedin" href="https://www.linkedin.com/in/mustapha-akabli-a2042422a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="pill pill-malt" href="https://www.malt.fr/profile/mustaphaakabli" target="_blank" rel="noopener">Malt</a>
+        <a class="pill pill-portfolio" href="cv.pdf" download>📄 Mon CV</a>
+      </div>
+    </div>
+  </section>
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong>✅ Adresse email copiée !</strong>
+    <span class="addr">mustapha.akabli.2018@gmail.com</span>
+    <div class="row">
+      <a class="gmail" href="https://mail.google.com/mail/?view=cm&fs=1&to=mustapha.akabli.2018@gmail.com&su=Contact%20depuis%20votre%20portfolio" target="_blank" rel="noopener">Écrire avec Gmail</a>
+      <a class="close" href="https://outlook.live.com/mail/0/deeplink/compose?to=mustapha.akabli.2018@gmail.com&subject=Contact%20depuis%20votre%20portfolio" target="_blank" rel="noopener">Outlook</a>
+      <a class="close" href="mailto:mustapha.akabli.2018@gmail.com">Application mail</a>
+      <button class="close" type="button" id="toastClose">Fermer</button>
+    </div>
+  </div>
+
+  <footer>© <span id="year"></span> Mustapha Akabli · Ingénieur Full Stack Java / Angular · Rabat, Maroc</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Texte animé (comme dans le README)
+    const lines = [
+      'Java • Spring Boot • Angular',
+      'Microservices • Kafka • Keycloak',
+      "J'aime livrer des applications fiables 🚀",
+      'Disponible : CDI ou freelance'
+    ];
+    const typed = document.getElementById('typed');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      typed.textContent = lines[0];
+    } else {
+      let line = 0, pos = 0, deleting = false;
+      (function tick() {
+        const chars = Array.from(lines[line]);
+        typed.textContent = chars.slice(0, pos).join('');
+        if (!deleting && pos < chars.length) { pos++; setTimeout(tick, 60); }
+        else if (!deleting) { deleting = true; setTimeout(tick, 1600); }
+        else if (pos > 0) { pos--; setTimeout(tick, 28); }
+        else { deleting = false; line = (line + 1) % lines.length; setTimeout(tick, 300); }
+      })();
+    }
+
+    // Barre de navigation : fond au défilement
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Thème clair / sombre
+    const root = document.documentElement;
+    try { const saved = localStorage.getItem('theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const isDark = root.dataset.theme ? root.dataset.theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.dataset.theme = isDark ? 'light' : 'dark';
+      try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+    });
+
+    // Bouton email : copie l'adresse et propose Gmail / Outlook (mailto ne marche pas sans application mail)
+    const EMAIL = 'mustapha.akabli.2018@gmail.com';
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    document.querySelectorAll('.js-email').forEach((btn) => {
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        try { navigator.clipboard.writeText(EMAIL).catch(() => {}); } catch (e) {}
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 12000);
+      });
+    });
+    document.getElementById('toastClose').addEventListener('click', () => toast.classList.remove('show'));
+
+    // Apparition des sections
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
